@@ -1,8 +1,8 @@
 # 请求的生命周期
 
-- [Overview](#overview)
-- [Start Files](#start-files)
-- [Application Events](#application-events)
+- [概要](#overview)
+- [启动文件](#start-files)
+- [应用事件](#application-events)
 
 <a name="overview"></a>
 ## 概要
@@ -16,15 +16,15 @@ Laravel 请求的生命周期相当简单，请求访问你的应用时，会被
 
 Your application's start files are stored at `app/start`. By default, three are included with your application: `global.php`, `local.php`, and `artisan.php`. For more information about `artisan.php`, refer to the documentation on the [Artisan command line](/docs/commands#registering-commands).
 
-应用的启动文件在 app/start 目录，默认情况下会有三个文件 global.php local.php artisan.php 。artisan.php 的更多信息可以参考 [Artisan 命令行](/docs/commands#registering-commands).
+应用的启动文件在 `app/start` 目录，默认情况下会有三个文件 `global.php` `local.php` 和 `artisan.php` 。`artisan.php` 的更多信息可以参考 [Artisan 命令行](/docs/commands#registering-commands).
 
 The `global.php` start file contains a few basic items by default, such as the registration of the [Logger](/docs/errors) and the inclusion of your `app/filters.php` file. However, you are free to add anything to this file that you wish. It will be automatically included on _every_ request to your application, regardless of environment. The `local.php` file, on the other hand, is only called when the application is executing in the `local` environment. For more information on environments, check out the [configuration](/docs/configuration) documentation.
-(
-global.php 中是注册 [Logger](docs/errors)、 包含 app/filters.php 过滤器文件之类的基本操作，不管什么环境每个请求都会被包含。 local.php 则是只在本地环境被执行。关于本地环境等的信息，参考 [配置](/docs/configuration) 。
+
+`global.php` 中是注册 [Logger](docs/errors)、 包含 `app/filters.php `过滤器文件之类的基本操作，不管什么环境每个请求都会被包含。 `local.php` 则是只在本地环境被执行。关于本地环境等的信息，参考 [配置](/docs/configuration) 。
 
 Of course, if you have other environments in addition to `local`, you may create start files for those environments as well. They will be automatically included when your application is running in that environment.
 
-当然，除了本地(local)环境，其他环境也可以有类似的文件，只在相应的环境被包含。
+当然，除了本地(`local`)环境，其他环境也可以有类似的文件，只在相应的环境被包含。
 
 <a name="application-events"></a>
 ## 应用事件 Application Events
@@ -48,4 +48,4 @@ You may also do pre and post request processing by registering `before`, `after`
 
 Listeners to these events will be run `before` and `after` each request to your application.
 
-这些事件的监听器会在每个请求之前或者之后执行。
+这些事件的监听器会在每个请求之前(`before`)或者之后(`after`)执行。
