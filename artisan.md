@@ -8,7 +8,7 @@
 
 Artisan is the name of the command-line interface included with Laravel. It provides a number of helpful commands for your use while developing your application. It is driven by the powerful Symfony Console component.
 
-artisan 是 laravel 的命令行工具，开发过程中可以提供很多辅助功能。它主要是受 php 框架 Symfony 的控制台组件启发。
+artisan 是 laravel 的命令行工具，提供一些辅助开发的功能。它主要是受 php 框架 Symfony 的控制台组件启发。
 
 <a name="usage"></a>
 ## 用法
