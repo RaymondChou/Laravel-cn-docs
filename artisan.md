@@ -1,7 +1,7 @@
 # Artisan 命令
 
-- [Introduction](#introduction)
-- [Usage](#usage)
+- [介绍](#introduction)
+- [用法](#usage)
 
 <a name="introduction"></a>
 ## 介绍
@@ -15,7 +15,7 @@ artisan 是 laravel 的命令行工具，开发过程中可以提供很多辅助
 
 To view a list of all available Artisan commands, you may use the `list` command:
 
-list 子命令可以查看所有可用的 artisan 子命令。
+`list` 子命令可以查看所有可用的 artisan 子命令。
 
 **列出所有可用命令**
 
@@ -23,7 +23,7 @@ list 子命令可以查看所有可用的 artisan 子命令。
 
 Every command also includes a "help" screen which displays and describes the command's available arguments and options. To view a help screen, simply precede the name of the command with `help`:
 
-我们可以通过 help 子命令获得某个子命令的使用方法， 以 migrate 子命令为例:
+我们可以通过 `help` 子命令获得某个子命令的使用方法， 以 migrate 子命令为例:
 
 **获得 migrate 命令的帮助信息**
 
@@ -31,7 +31,7 @@ Every command also includes a "help" screen which displays and describes the com
 
 You may specify the configuration environment that should be used while running a command using the `--env` switch:
 
-有时候我们需要指定命令执行的环境，使用 --env 参数：
+有时候我们需要指定命令执行的环境，使用 `--env` 参数：
 
 **指定配置环境**
 
@@ -39,7 +39,7 @@ You may specify the configuration environment that should be used while running 
 
 You may also view the current version of your Laravel installation usin--g the `--version` option:
 
-通过 --version 选项可以获得当前安装的 laravel 版本:
+通过 `--version` 选项可以获得当前安装的 laravel 版本:
 
 **现实当前 laravel 版本**
 
