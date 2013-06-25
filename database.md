@@ -4,14 +4,14 @@
 - [执行查询](#running-queries)
 - [数据库事务](#database-transactions)
 - [数据库连接管理](#accessing-connections)
-- [查询 log](#query-logging)
+- [查询缓存](#query-logging)
 
 <a name="configuration"></a>
 ## 配置
 
 Laravel makes connecting with databases and running queries extremely simple. The database configuration file is `app/config/database.php`. In this file you may define all of your database connections, as well as specify which connection should be used by default. Examples for all of the supported database systems are provided in this file.
 
-Laravel 的数据库操作十分简单，在配置文件 `app/config/database.php` 中定义你使用的数据库的信息， 所有支持的数据库都用配置样例供参考。 注意要指定一个默认使用的数据库连接信息。
+Laravel 的数据库操作十分简单，在配置文件 `app/config/database.php` 中定义你使用的数据库的信息， 所有支持的数据库都有配置样例供参考。 注意要指定一个默认使用的数据库连接。
 
 Currently Laravel supports four database systems: MySQL, Postgres, SQLite, and SQL Server.
 
@@ -95,10 +95,10 @@ Sometimes you may need to reconnect to a given database:
 	DB::reconnect('foo');
 
 <a name="query-logging"></a>
-## 查询 log
+## 查询缓存
 
 By default, Laravel keeps a log in memory of all queries that have been run for the current request. However, in some cases, such as when inserting a large number of rows, this can cause the application to use excess memory. To disable the log, you may use the `disableQueryLog` method:
 
-默认情况下，laravel 会保存当前请求的所有查询。某些情况下， 比如需要插入大量的记录时可能导致一些内存耗光，这时候可以用 `disableQueryLog` 方法禁用该功能：
+默认情况下，laravel 会保存当前请求的所有查询。某些情况下， 比如需要插入大量的记录时可能导致内存耗光，这时候可以用 `disableQueryLog` 方法禁用该功能：
 
 	DB::connection()->disableQueryLog();
