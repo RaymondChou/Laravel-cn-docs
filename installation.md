@@ -1,63 +1,63 @@
-# Installation
+# 安装
 
-- [Install Composer](#install-composer)
-- [Install Laravel](#install-laravel)
-- [Server Requirements](#server-requirements)
-- [Configuration](#configuration)
-- [Pretty URLs](#pretty-urls)
+- [安装 Composer](#install-composer)
+- [安装 Laravel](#install-laravel)
+- [服务器环境要求](#server-requirements)
+- [配置](#configuration)
+- [简洁的链接](#pretty-urls)
 
 <a name="install-composer"></a>
-## Install Composer
+## 安装 Composer
 
-Laravel utilizes [Composer](http://getcomposer.org) to manage its dependencies. First, download a copy of the `composer.phar`. Once you have the PHAR archive, you can either keep it in your local project directory or move to `usr/local/bin` to use it globally on your system. On Windows, you can use the Composer [Windows installer](https://getcomposer.org/Composer-Setup.exe).
+Laravel 使用 [Composer](http://getcomposer.org) 来管理依赖关系. 首先, 下载一份 `composer.phar`的拷贝. 一旦你有了这个PHAR包, 你可以将它放到本地项目目录里面或者移到 `usr/local/bin` 目录下来保证能够在系统任一地点使用. 在 Windows 上, 你可以使用 Windows 版的 Composer [安装工具](https://getcomposer.org/Composer-Setup.exe).
 
 <a name="install-laravel"></a>
-## Install Laravel
+## 安装 Laravel
 
-### Via Download
+### 通过下载
 
-Once Composer is installed, download the [latest version](https://github.com/laravel/laravel/archive/master.zip) of the Laravel framework and extract its contents into a directory on your server. Next, in the root of your Laravel application, run the `php composer.phar install` (or `composer install`) command to install all of the framework's dependencies. This process requires Git to be installed on the server to successfully complete the installation.
+一旦 Composer 已安装, 下载 [最新版](https://github.com/laravel/laravel/archive/master.zip) Laravel 框架然后解压到你服务器上一个目录内. 然后在你的Laravel应用的根目录下执行 `php composer.phar install` (或者 `composer install`) 命令来安装这个框架的所有依赖. 这需要你服务器上已经安装了 Git 才能完成整个安装过程.
 
-### Via Composer Create-Project
+### 通过 Composer Create-Project
 
-You may also install Laravel by issuing the Composer `create-project` command in your terminal:
+你也可以通过在终端调用Composer的 `create-project` 命令来安装Laravel框架:
 
 	composer create-project laravel/laravel
 
-Once Laravel is installed, you may update the framework using the `php composer.phar update` command.
+一旦 Laravel 已安装, 你可以通过 `php composer.phar update` 命令来升级该框架.
 
 <a name="server-requirements"></a>
-## Server Requirements
+## 服务器环境要求
 
-The Laravel framework has a few system requirements:
+Laravel框架对系统存在一些要求:
 
 - PHP >= 5.3.7
 - MCrypt PHP Extension
 
 <a name="configuration"></a>
-## Configuration
+## 配置
 
-Laravel needs almost no configuration out of the box. You are free to get started developing! However, you may wish to review the `app/config/app.php` file and its documentation. It contains several options such as `timezone` and `locale` that you may wish to change according to your application.
+Laravel 几乎不需要进行配置就可以立即投入使用. 自由地开始开发工作吧! 然而, 你可能会想查阅 `app/config/app.php` 配置文件以及其文档. 它包含了一些类似于 `timezone` 和 `locale` 之类的选项, 你可以根据你的应用来自由的进行修改.
 
-> **Note:** One configuration option you should be sure to set is the `key` option within `app/config/app.php`. This value should be set to a 32 character, random string. This key is used when encrypting values, and encrypted values will not be safe until it is properly set. You can set this value quickly by using the following artisan command `php artisan key:generate`.
+> **注意:** 一个你确定需要修改的配置项就是 `key` 选项, 位于 `app/config/app.php` 文件里面. 该项的值应该被设置成一个32位的随机字符串, 这个 key 被用于加密操作, 除非你恰当的设置了该项, 否则加密的值将不能保证安全. 你可以通过 artisan 命令 `php artisan key:generate` 来快速的设置该项的值.
 
 <a name="permissions"></a>
-### Permissions
-Laravel requires one set of permissions to be configured - folders within app/storage require write access by the web server.
+### 权限
+Laravel 需要一项权限许可 - 位于 app/storage 下的目录需要服务器的可写权限.
 
 <a name="paths"></a>
-### Paths
+### 路径
 
-Several of the framework directory paths are configurable. To change the location of these directories, check out the `bootstrap/paths.php` file.
+该框架的部分部分目录路径是可配置的. 要修改这些目录的路径的话, 请参阅 `bootstrap/paths.php` 文件.
 
-> **Note:** Laravel is designed to protect your application code, and local storage by placing only files that are necessarily public in the public folder.  It is recommended that you either set the public folder as your site's documentRoot (also known as a web root) or to place the contents of public into your site's root directory and place all of Laravel's other files outside the web root. 
+> **注意:** Laravel 仅放置那些必须公开的文件到 public 文件夹下, 旨在保护你的应用代码以及本地存储. 推荐的做法是你或者将 public 文件夹设定为你站点的 documentRoot (也就是 web 根目录) 或者将 public 文件夹下的内容放入站点的根目录内然后将 Laravel 相关的其他文件移出根目录.
 
 <a name="pretty-urls"></a>
-## Pretty URLs
+## 简洁的链接
 
-The framework ships with a `public/.htaccess` file that is used to allow URLs without `index.php`. If you use Apache to serve your Laravel application, be sure to enable the `mod_rewrite` module.
+与框架同存的 `public/.htaccess` 文件被用于去除 URL 中的 `index.php`. 如果你使用 Apache 来运行你的 Laravel 应用程序, 请确保开启了 `mod_rewrite` 模块.
 
-If the `.htaccess` file that ships with Laravel does not work with your Apache installation, try this one:
+如果该 `.htaccess` 文件在你安装的 Apache 下不工作的话, 试试这个:
 
 	Options +FollowSymLinks
 	RewriteEngine On
