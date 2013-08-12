@@ -1,91 +1,91 @@
 # Validation
 
-- [Basic Usage](#basic-usage)
-- [Working With Error Messages](#working-with-error-messages)
-- [Error Messages & Views](#error-messages-and-views)
-- [Available Validation Rules](#available-validation-rules)
-- [Custom Error Messages](#custom-error-messages)
-- [Custom Validation Rules](#custom-validation-rules)
+- [基本用法](#basic-usage)
+- [处理错误消息](#working-with-error-messages)
+- [错误消息 & 视图](#error-messages-and-views)
+- [可用的验证规则集](#available-validation-rules)
+- [自定义错误消息](#custom-error-messages)
+- [自定义验证规则](#custom-validation-rules)
 
 <a name="basic-usage"></a>
-## Basic Usage
+## 基本用法
 
-Laravel ships with a simple, convenient facility for validating data and retrieving validation error messages via the `Validation` class.
+Laravel 通过 `Validation` 类附带了一个简单, 方便的用于验证数据和检索验证错误消息的实现.
 
-**Basic Validation Example**
+**基本的验证例子**
 
 	$validator = Validator::make(
 		array('name' => 'Dayle'),
 		array('name' => 'required|min:5')
 	);
 
-The first argument passed to the `make` method is the data under validation. The second argument is the validation rules that should be applied to the data.
+传给 `make` 方法的第一个参数是需要进行验证的数据. 第二个参数则是将被应用于数据上的验证规则.
 
-Multiple rules may be delimited using either a "pipe" character, or as separate elements of an array.
+多重验证规则可以通过 "管道" 符进行区分, 或者分离为一个数组来实现.
 
-**Using Arrays To Specify Rules**
+**使用数组来指定规则**
 
 	$validator = Validator::make(
 		array('name' => 'Dayle'),
 		array('name' => array('required', 'min:5'))
 	);
 
-Once a `Validator` instance has been created, the `fails` (or `passes`) method may be used to perform the validation.
+一旦一个 `验证器` 实例被创建, 就可以使用 `fails` (或 `passes`) 方法来执行该验证.
 
 	if ($validator->fails())
 	{
 		// The given data did not pass validation
 	}
 
-If validation has failed, you may retrieve the error messages from the validator.
+如果验证失败, 你可以从验证器实例中取得错误消息.
 
 	$messages = $validator->messages();
 
-You may also access an array of the failed validation rules, without messages. To do so, use the `failed` method:
+你也可以访问一个包含已失败的验证规则的数组, 不包含错误消息. 要这样做的话, 请使用 `failed` 方法:
 
 	$failed = $validator->failed();
 
-**Validating Files**
+**验证文件**
 
-The `Validator` class provides several rules for validating files, such as `size`, `mimes`, and others. When validating files, you may simply pass them into the validator with your other data.
+`Validator` 类提供了许多规则来验证文件, 例如 `size`, `mimes` 等等. 在验证文件的时候, 只需简单的与其他数据一起传入验证器即可.
 
 <a name="working-with-error-messages"></a>
-## Working With Error Messages
+## 处理错误消息
 
-After calling the `messages` method on a `Validator` instance, you will receive a `MessageBag` instance, which has a variety of convenient methods for working with error messages.
+在一个 `Validator` 实例上调用了 `messages` 方法之后, 你将得到一个 `MessageBag` 实例, 该实例拥有各种各样方便的方法来处理错误消息.
 
-**Retrieving The First Error Message For A Field**
+**检索一个字段的第一个错误消息**
 
 	echo $messages->first('email');
 
-**Retrieving All Error Messages For A Field**
+**检索一个字段的所有错误消息**
 
 	foreach ($messages->get('email') as $message)
 	{
 		//
 	}
 
-**Retrieving All Error Messages For All Fields**
+**检索所有字段的所有错误消息**
 
 	foreach ($messages->all() as $message)
 	{
 		//
 	}
 
-**Determining If Messages Exist For A Field**
+**判断是否包含与指定字段有关的错误消息**
 
 	if ($messages->has('email'))
 	{
 		//
 	}
 
-**Retrieving An Error Message With A Format**
+**按照指定格式来检索错误消息**
 
 	echo $messages->first('email', '<p>:message</p>');
 
-> **Note:** By default, messages are formatted using Bootstrap compatible syntax.
+> **注意:** 默认情况下, 错误消息均按 Bootstrap 兼容语法进行格式化.
 
-**Retrieving All Error Messages With A Format**
+**按照指定格式来检索所有错误消息**
 
 	foreach ($messages->all('<li>:message</li>') as $message)
 	{
@@ -93,9 +93,9 @@ After calling the `messages` method on a `Validator` instance, you will receive 
 	}
 
 <a name="error-messages-and-views"></a>
-## Error Messages & Views
+## 错误消息 & 视图
 
-Once you have performed validation, you will need an easy way to get the error messages back to your views. This is conveniently handled by Laravel. Consider the following routes as an example:
+一旦你完成了一次验证, 你需要一个简便的方法来将错误消息往视图里面回填. Laravel 能很方便的对此进行处理. 请看如下路由的例子:
 
 	Route::get('register', function()
 	{
@@ -114,18 +114,18 @@ Once you have performed validation, you will need an easy way to get the error m
 		}
 	});
 
-Note that when validation fails, we pass the `Validator` instance to the Redirect using the `withErrors` method. This method will flash the error messages to the session so that they are available on the next request.
+注意一旦验证失败我们就会把 `Validator` 的实例通过 `withErrors` 方法传递给 Redirect. 该方法将会缓存错误消息到session里面去以便在下一次请求的时候能够被使用.
 
-However, notice that we do not have to explicitly bind the error messages to the view in our GET route. This is because Laravel will always check for errors in the session data, and automatically bind them to the view if they are available. **So, it is important to note that an `$errors` variable will always be available in all of your views, on every request**, allowing you to conveniently assume the `$errors` variable is always defined and can be safely used. The `$errors` variable will be an instance of `MessageBag`.
+然而, 要注意的一点是我们并不一定需要在 GET 路由中明确地给视图绑定错误消息. 这是因为 Laravel 总会在session数据中查找错误消息, 如果可用的话则自动将它们绑定到视图中去. **所以, 一定要注意 `$errors` 变量在你的所有视图中都可使用, 在每次请求中**, 这允许你假定 `$errors` 变量已经被定义并且能被安全地拿来使用. `$errors` 变量将会是 `MessageBag` 的一个实例.
 
-So, after redirection, you may utilize the automatically bound `$errors` variable in your view:
+所以, 在重定向之后, 你就可以在你的视图中使用已经自动绑定好的 `$errors` 变量了:
 
 	<?php echo $errors->first('email'); ?>
 
 <a name="available-validation-rules"></a>
-## Available Validation Rules
+## 可用的验证规则集
 
-Below is a list of all available validation rules and their function:
+如下是一个所有可用的验证规则的清单以及它们的功能:
 
 - [Accepted](#rule-accepted)
 - [Active URL](#rule-active-url)
